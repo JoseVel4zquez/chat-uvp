@@ -20,14 +20,10 @@ export default function Login() {
       />
       <View style={styles.viewContainer}>
         <LoginForm />
-        <Text style={styles.textRegister}>
+
+        <Text style={styles.btnRegister} onPress={goToRegister}>
           Registrate con tu correo institucional
         </Text>
-        <Button
-          title="Registrarse"
-          style={styles.btnRegister}
-          onPress={goToRegister}
-        />
       </View>
       <Divider style={styles.divider} />
       <View>

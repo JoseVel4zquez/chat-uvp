@@ -4,6 +4,7 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AccountScreen from "../screens/Account/AccountScreen";
 import RegisterScreen from "../screens/register/RegisterScreen";
+import ChatScreen from "../screens/ChatScreen";
 
 const Stack = createNativeStackNavigator();
 const navigation = useNavigation;
@@ -21,6 +22,11 @@ export default function Navigation() {
           name="registro"
           navigation={navigation}
           component={RegisterScreen}
+        />
+        <Stack.Screen
+          name="Chat"
+          navigation={navigation}
+          component={ChatScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
