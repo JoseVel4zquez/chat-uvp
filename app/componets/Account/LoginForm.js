@@ -1,29 +1,47 @@
 import { View, Text, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import Toast from "react-native-toast-message";
 import { Input, Icon, Button } from "react-native-elements";
+import { useFormik } from "formik";
 import Loading from "../Loading";
+import { initialValues, validationSchema } from "./Login/LoginForm.data";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState(defaultFormValue());
-  const [loading, setLoading] = useState(false);
+
   const navigation = useNavigation();
 
-  const onChange = (e, type) => {
-    setFormData({ ...formData, [type]: e.nativeEvent.text });
-  };
-
-  const onSubmit = () => {
-    setLoading(true);
-  };
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: validationSchema(),
+    validateOnChange: false,
+    onSubmit: async (formvalues) => {
+      try {
+        const auth = getAuth();
+        await signInWithEmailAndPassword(
+          auth,
+          formvalues.email,
+          formvalues.password
+        );
+        navigation.goBack();
+      } catch (error) {
+        Toast.show({
+          type: "error",
+          position: "bottom",
+          text1: "Usuario o contraseña incorrectos",
+        });
+      }
+    },
+  });
 
   return (
     <View style={styles.formContainer}>
       <Input
         placeholder="Correo electronico"
         containerStyle={styles.inputForm}
-        onChange={(e) => onChange(e, "email")}
+        onChangeText={(text) => formik.setFieldValue("email", text)}
         rightIcon={
           <Icon
             type="material-community"
@@ -31,13 +49,14 @@ export default function LoginForm() {
             iconStyle={styles.iconRight}
           />
         }
+        errorMessage={formik.errors.email}
       />
       <Input
         placeholder="Contraseña"
         containerStyle={styles.inputForm}
         password={true}
         secureTextEntry={showPassword ? false : true}
-        onChange={(e) => onChange(e, "password")}
+        onChangeText={(text) => formik.setFieldValue("password", text)}
         rightIcon={
           <Icon
             type="material-community"
@@ -46,14 +65,15 @@ export default function LoginForm() {
             onPress={() => setShowPassword(!showPassword)}
           />
         }
+        errorMessage={formik.errors.password}
       />
       <Button
         title="Iniciar sesion"
         containerStyle={styles.btonContainerLogin}
         buttonStyle={styles.btnLogin}
-        onPress={onSubmit}
+        onPress={formik.handleSubmit}
       />
-      <Loading isVisible={loading} text="Iniciando sesion" />
+      <Loading isVisible={formik.isSubmitting} text="Iniciando sesion" />
     </View>
   );
 }

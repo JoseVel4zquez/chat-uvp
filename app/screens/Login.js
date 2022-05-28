@@ -21,8 +21,12 @@ export default function Login() {
       <View style={styles.viewContainer}>
         <LoginForm />
 
-        <Text style={styles.btnRegister} onPress={goToRegister}>
-          Registrate con tu correo institucional
+        <Text style={styles.textRegister}>
+          Aun no tienes cuenta?
+          <Text style={styles.btnRegister} onPress={goToRegister}>
+            {" "}
+            Registrate como invitado
+          </Text>
         </Text>
       </View>
       <Divider style={styles.divider} />
