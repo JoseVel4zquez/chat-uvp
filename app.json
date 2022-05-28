@@ -19,10 +19,17 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.expo.chatbot"
+      "bundleIdentifier": "com.expo.chatbot",
+      "config":{
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.188689865659-otl662pp0bed3l5evujts55kqr9ik1sf"
+        }
+      },
+      "googleServicesFile": "./google-services.json"
     },
     "android": {
       "package": "com.expo.chatbot",
+      "googleServicesFile": "./google-services.json",
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
