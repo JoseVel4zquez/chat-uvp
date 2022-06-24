@@ -5,11 +5,7 @@ import { SocialIcon } from "react-native-elements";
 export default function GoogleForm() {
   return (
     <>
-      <SocialIcon
-        title="Iniciar sesion con tu correo institucional"
-        button
-        type="google"
-      />
+      <SocialIcon title="Iniciar sesion con Google" button type="google" />
     </>
   );
 }
