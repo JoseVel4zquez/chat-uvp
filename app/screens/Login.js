@@ -25,14 +25,12 @@ export default function Login() {
           Aun no tienes cuenta?
           <Text style={styles.btnRegister} onPress={goToRegister}>
             {" "}
-            Registrate como invitado
+            Registrate ahora!
           </Text>
         </Text>
       </View>
-      <Divider style={styles.divider} />
-      <View>
-        <GoogleForm />
-      </View>
+      {/* <Divider style={styles.divider} /> */}
+      <View>{/* <GoogleForm /> */}</View>
     </ScrollView>
   );
 }
