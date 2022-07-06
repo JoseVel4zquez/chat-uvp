@@ -14,7 +14,7 @@ export default function Navigation() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Iniciar sesion"
+          name="Mi UVP"
           navigation={navigation}
           component={AccountScreen}
         />
